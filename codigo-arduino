@@ -1,0 +1,29 @@
+#include <SoftwareSerial.h>
+SoftwareSerial BT(4,2); // 
+
+void setup()  
+{
+  // Pin 13 Digital de Arduino
+  pinMode(13, OUTPUT);
+  // Velocidad serial del Modulo BT
+  BT.begin(9600);
+}
+char led; // Led es nuestro led conectado a Arduino
+void loop() 
+{
+  if (BT.available())
+  // Siclo if para definir que se acción se ejecutara si Arduino recibe el dato "a" (si lo recibe el led se enciende)
+  {
+    led=(BT.read());
+    if (led=='a')
+    {
+      digitalWrite(13, HIGH);
+      BT.println("LED on");
+    }
+    if (led=='b')
+     // Siclo if para definir que se acción se ejecutara si Arduino recibe el dato "b" (si lo recibe el led se apaga)
+    {
+      digitalWrite(13, LOW);
+    }  
+  }
+}
